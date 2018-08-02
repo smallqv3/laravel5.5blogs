@@ -8,10 +8,10 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    // public function create()
-    // {
-    //     return view('users.create');
-    // }
+    public function create()
+    {
+        return view('users.create');
+    }
 
     public function show(User $user)
     {
@@ -32,6 +32,7 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        Auth::login($user);
         session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
         return redirect()->route('users.show', [$user]);
     }
